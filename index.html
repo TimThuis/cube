@@ -1,31 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <!-- pixel ratio for mobile devices -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="generator" content="Three.js Editor">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				font-family: sans-serif;
+				font-size: 13px;
+				background-color: #000;
+				margin: 0px;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body ontouchstart="">
+		<script src="js/three.min.js"></script>
+		<script src="js/app.js"></script>
+		
+		<script>
 
-    <!-- meta tags for search engines -->
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <meta name="author" content="" />
+			var loader = new THREE.FileLoader();
+			loader.load( 'app.json', function ( text ) {
 
-    <!-- social links -->
-    <meta property="og:title" content="">
-    <meta property="og:description" content="">
-    <meta property="og:image" content="">
-    <meta property="og:url" content="">
+				var player = new APP.Player();
+				player.load( JSON.parse( text ) );
+				player.setSize( window.innerWidth, window.innerHeight );
+				player.play();
 
-    <!-- tab info browser -->
-    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
-    <title></title>
+				document.body.appendChild( player.dom );
 
-    <!-- css -->
-    <link rel="stylesheet" type="text/css" href="./style.min.css">
-  </head>
-  <body>
-    <p>Test Page</p>
-
-  </body>
-  <script src="./main.js"></script>
+				window.addEventListener( 'resize', function () {
+					player.setSize( window.innerWidth, window.innerHeight );
+				} );
+			} );
+			
+		</script>
+	</body>
 </html>
