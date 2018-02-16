@@ -15,16 +15,16 @@
 			"generator": "Object3D.toJSON"
 		},
 		"object": {
-			"uuid": "2F40B91B-CFD1-4F80-90E8-5A5CFA21F5A3",
+			"uuid": "934685CE-819D-4407-9B13-826185BFB816",
 			"type": "PerspectiveCamera",
 			"name": "Camera",
-			"matrix": [-0.429029,0,-0.903291,0,-0.14462,0.9871,0.068689,0,0.891639,0.160103,-0.423494,0,267.441342,103.144562,-85.71352,1],
+			"matrix": [-0.556463,0,-0.830873,0,-0.48897,0.808496,0.327479,0,0.671757,0.588502,-0.449898,0,211.150771,216.576766,-126.549917,1],
 			"fov": 50,
 			"zoom": 1,
 			"near": 0.01,
 			"far": 1000,
 			"focus": 10,
-			"aspect": 1.640288,
+			"aspect": 0.722598,
 			"filmGauge": 35,
 			"filmOffset": 0
 		}
@@ -185,7 +185,7 @@
 				"uuid": "AAD680E0-1214-45AA-9090-2A32567A82B5",
 				"type": "MeshStandardMaterial",
 				"color": 3026478,
-				"roughness": 0.75,
+				"roughness": 1,
 				"metalness": 0.25,
 				"emissive": 0,
 				"depthFunc": 3,
@@ -212,17 +212,6 @@
 				"emissive": 0,
 				"opacity": 0.5,
 				"transparent": true,
-				"depthFunc": 3,
-				"depthTest": true,
-				"depthWrite": true
-			},
-			{
-				"uuid": "31ED533A-548A-478B-B391-D912F5B5AE84",
-				"type": "MeshStandardMaterial",
-				"color": 3552822,
-				"roughness": 0.5,
-				"metalness": 0.5,
-				"emissive": 0,
 				"depthFunc": 3,
 				"depthTest": true,
 				"depthWrite": true
@@ -266,6 +255,7 @@
 							"uuid": "66D83119-6142-459E-8716-7E49FF6D68AF",
 							"type": "Mesh",
 							"name": "cubeBiglPlexWhite.stl",
+							"receiveShadow": true,
 							"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
 							"geometry": "85CAF64C-6DCF-4FDA-B9A5-EC944C48D099",
 							"material": "0CCBEEE9-FED0-46CD-B62A-EF86F5E6756C"
@@ -279,7 +269,7 @@
 					"receiveShadow": true,
 					"matrix": [1,0,0,0,0,0,-1,0,0,1,0,0,40,40,40,1],
 					"geometry": "E6610C4D-5963-4261-BC75-7717A7283107",
-					"material": "31ED533A-548A-478B-B391-D912F5B5AE84",
+					"material": "AAD680E0-1214-45AA-9090-2A32567A82B5",
 					"children": [
 						{
 							"uuid": "CD09337E-5759-4066-B521-8F34589C36AC",
@@ -302,11 +292,63 @@
 					"uuid": "153E123B-6477-4914-B54B-C7B2F0C40215",
 					"type": "AmbientLight",
 					"name": "AmbientLight",
-					"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,131.994868,0,1],
+					"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
 					"color": 16777215,
-					"intensity": 2
+					"intensity": 1
+				},
+				{
+					"uuid": "4BA7B605-AA3C-474C-BFE7-35476364DB4D",
+					"type": "PointLight",
+					"name": "PointLight",
+					"castShadow": true,
+					"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,150,0,1],
+					"color": 16777215,
+					"intensity": 1,
+					"distance": 0,
+					"decay": 1,
+					"shadow": {
+						"camera": {
+							"uuid": "01A217FF-6EEE-4D7C-8AE7-E3DAD89EB9CB",
+							"type": "PerspectiveCamera",
+							"fov": 90,
+							"zoom": 1,
+							"near": 0.5,
+							"far": 500,
+							"focus": 10,
+							"aspect": 1,
+							"filmGauge": 35,
+							"filmOffset": 0
+						}
+					}
+				},
+				{
+					"uuid": "AED60685-C968-432C-ADD6-14B1F27E92E8",
+					"type": "SpotLight",
+					"name": "SpotLight",
+					"castShadow": true,
+					"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,-50,150,-50,1],
+					"color": 16252923,
+					"intensity": 3,
+					"distance": 0,
+					"angle": 0.5,
+					"decay": 1,
+					"penumbra": 0.5,
+					"shadow": {
+						"camera": {
+							"uuid": "9348AAD1-B90A-4707-9119-CF584FC37F14",
+							"type": "PerspectiveCamera",
+							"fov": 57.29578,
+							"zoom": 1,
+							"near": 0.5,
+							"far": 500,
+							"focus": 10,
+							"aspect": 1,
+							"filmGauge": 35,
+							"filmOffset": 0
+						}
+					}
 				}],
-			"background": 11184810
+			"background": 0
 		}
 	},
 	"scripts": {}

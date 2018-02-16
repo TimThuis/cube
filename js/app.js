@@ -241,7 +241,19 @@ var APP = {
 
 		}
 
+		var animation = new TimelineMax({
+      paused: true
+    });
+
 		function onDocumentMouseDown( event ) {
+
+			animation.to(scene.children[1].position, 4, {
+        x: 0,
+				y: 0,
+				z: 0,
+      });
+
+			animation.play();
 
 			dispatch( events.mousedown, event );
 
@@ -254,12 +266,20 @@ var APP = {
 		}
 
 		function onDocumentMouseMove( event ) {
-
+			// scene.rotation.y = event.screenY;
 			dispatch( events.mousemove, event );
 
 		}
 
 		function onDocumentTouchStart( event ) {
+
+			animation.to(scene.children[1].position, 4, {
+				x: 0,
+				y: 0,
+				z: 0,
+			});
+
+			animation.play();
 
 			dispatch( events.touchstart, event );
 
