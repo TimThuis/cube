@@ -1,6 +1,14 @@
-/**
- * @author mrdoob / http://mrdoob.com/
- */
+var auth = "4cb7b495cff346ac9d83c7b1a9a2efe9";
+var port = "V1";
+var baseUrl = "http://blynk-cloud.com/";
+
+// url's
+var getUrl = baseUrl + auth + "/get/" + port;
+
+// animation's
+var animation = new TimelineMax({
+	paused: true
+});
 
 var APP = {
 
@@ -122,6 +130,7 @@ var APP = {
 		this.setScene = function ( value ) {
 
 			scene = value;
+			cubeInsert(scene);
 
 		};
 
@@ -188,6 +197,7 @@ var APP = {
 			document.addEventListener( 'touchend', onDocumentTouchEnd );
 			document.addEventListener( 'touchmove', onDocumentTouchMove );
 
+
 			dispatch( events.start, arguments );
 
 			renderer.animate( animate );
@@ -227,8 +237,6 @@ var APP = {
 
 		};
 
-		//
-
 		function onDocumentKeyDown( event ) {
 
 			dispatch( events.keydown, event );
@@ -240,10 +248,6 @@ var APP = {
 			dispatch( events.keyup, event );
 
 		}
-
-		var animation = new TimelineMax({
-      paused: true
-    });
 
 		function onDocumentMouseDown( event ) {
 
@@ -300,3 +304,43 @@ var APP = {
 	}
 
 };
+
+function cubeInsert(scene) {
+
+	// console.log(scene);
+
+	animation.to(scene.children[1].position, 4, {
+		x: 0,
+		y: 0,
+		z: 0,
+	});
+
+	setInterval(function() {
+	  console.log("state http call");
+	  callData(getUrl);
+	}, 1000);
+}
+
+function callData(url) {
+  axios.get(url)
+  .then(function (response) {
+    console.log("status data: " + response.status);
+    useData(response.data);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
+function useData(data) {
+  console.log(data);
+
+	if (data == "0") {
+		// no insert
+		animation.play();
+	}
+	else if (data == "1") {
+		// inset
+		animation.reverse();
+	}
+}
