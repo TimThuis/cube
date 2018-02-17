@@ -1,6 +1,6 @@
 var auth = "4cb7b495cff346ac9d83c7b1a9a2efe9";
 var port = "V1";
-var baseUrl = "http://blynk-cloud.com/";
+var baseUrl = "https://blynk-cloud.com/";
 
 // url's
 var getUrl = baseUrl + auth + "/get/" + port;
