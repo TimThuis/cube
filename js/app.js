@@ -1,7 +1,6 @@
 var auth = "4cb7b495cff346ac9d83c7b1a9a2efe9";
 var port = "V1";
-var baseUrl = "https://blynk-cloud.com/";
-
+var baseUrl = "http://blynk-cloud.com/";
 // url's
 var getUrl = baseUrl + auth + "/get/" + port;
 
@@ -251,12 +250,6 @@ var APP = {
 
 		function onDocumentMouseDown( event ) {
 
-			animation.to(scene.children[1].position, 4, {
-        x: 0,
-				y: 0,
-				z: 0,
-      });
-
 			animation.play();
 
 			dispatch( events.mousedown, event );
@@ -270,20 +263,12 @@ var APP = {
 		}
 
 		function onDocumentMouseMove( event ) {
-			// scene.rotation.y = event.screenY;
+
 			dispatch( events.mousemove, event );
 
 		}
 
 		function onDocumentTouchStart( event ) {
-
-			animation.to(scene.children[1].position, 4, {
-				x: 0,
-				y: 0,
-				z: 0,
-			});
-
-			animation.play();
 
 			dispatch( events.touchstart, event );
 
@@ -297,26 +282,38 @@ var APP = {
 
 		function onDocumentTouchMove( event ) {
 
+			movement = (event.touches[0].screenX - (window.innerWidth / 2)) / 100;
+			scene.rotation.y = movement;
+
 			dispatch( events.touchmove, event );
 
 		}
-
 	}
 
 };
 
 function cubeInsert(scene) {
 
-	// console.log(scene);
+	var insertCube = scene.children[1];
+	var insertCubeBlack = insertCube.children[0];
+	var insertCubePlex = insertCube.children[1];
+	var baseCube = scene.children[2];
 
-	animation.to(scene.children[1].position, 4, {
+	animation.to(insertCube.position, 2, {
 		x: 0,
 		y: 0,
 		z: 0,
-	});
+	},"start")
+	.from(insertCube.rotation, 2, {
+		y: 0.5,
+		z: 0.5,
+	}, "start")
+	.from([insertCube.material, insertCubeBlack.material, insertCubePlex.materiaal], 2, {
+		// transparent: true,
+		opacity: 0,
+	}, "start");
 
 	setInterval(function() {
-	  console.log("state http call");
 	  callData(getUrl);
 	}, 1000);
 }
@@ -324,7 +321,6 @@ function cubeInsert(scene) {
 function callData(url) {
   axios.get(url)
   .then(function (response) {
-    console.log("status data: " + response.status);
     useData(response.data);
   })
   .catch(function (error) {
@@ -333,14 +329,12 @@ function callData(url) {
 }
 
 function useData(data) {
-  console.log(data);
-
-	if (data == "0") {
-		// no insert
-		animation.play();
-	}
-	else if (data == "1") {
-		// inset
+	if (data == "1") {
+		console.log("reverse");
 		animation.reverse();
+	}
+	else if (data == "0") {
+		console.log("play");
+		animation.play();
 	}
 }
